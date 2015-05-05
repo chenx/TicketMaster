@@ -1,5 +1,7 @@
 # TicketMaster
-A Java application to automate checking tour tickets information and booking tickets.
+A Java console application to automate checking tour tickets information and booking tickets.
+
+It uses http request/response and html parsing to filter out needed information, log in to the website and carry operations.
 
 To use, change parameters in Agent.config. 
 
