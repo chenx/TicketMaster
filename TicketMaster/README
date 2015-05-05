@@ -1,0 +1,69 @@
+# http://www.mkyong.com/java/how-to-automate-login-a-website-java-example/
+# http://jsoup.org/download
+# http://www.mkyong.com/java/java-httpurlconnection-follow-redirect-example/
+# http://stackoverflow.com/questions/4716503/best-way-to-read-a-text-file
+# http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string
+# http://kodejava.org/how-to-remove-non-ascii-characters-from-a-string/
+# http://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html
+# javac -cp <jar you want to include>;<jar you want to include> <source.java>
+# on unix, replace ';' with ':'. If multiple jars, use ',' in between.
+
+# http://time.is/
+
+# 1) sign in from:
+#    https://www.recreation.gov/memberSignInSignUp.do
+# 2) get tour info from (first select date, then select time sessions with enough seats):
+#    http://www.recreation.gov/tourDetails.do?contractCode=NRSO&tourId=317399
+# 3) check and confirm info at: (but could ignore this, no parameter is posted, just redirect to checkout page):
+# https://www.recreation.gov/viewShoppingCart.do?contractCode=NRSO&tourId=317399&tourDate=Mon%20Apr%2020%202015&cat=0&numberOfTicketsSearched=1
+# 4) checkout, pay at:
+#    https://www.recreation.gov/checkoutShoppingCart.do
+
+Another way:
+# 1) check tour info
+# 2) login:
+#    https://www.recreation.gov/memberSignInSignUp.do?contractCode=NRSO&tourId=317399&tourDate=Mon%20Apr%2020%202015&cat=0&numberOfTicketsSearched=1
+#    if login successful, will have "Shopping Cart" at keyword.
+# 3) view cart details
+# 4) checkout cart
+# 5) process
+
+
+#################################################
+# A login session output is below.
+# Note: NSC_QSPE-VXQSFD-IUUQT is constant. _rauv and JSESSIONID varies each time. ==
+# If login is successful, keywords will show: "Account Overview" and "Profile Overview" ==
+
+
+++++++++ get login page content +++++++++++
+Sending 'GET' request to URL : https://www.recreation.gov/memberSignInSignUp.do
+Response Code : 200
+===cookies===
+cookie: NSC_QSPE-VXQSFD-IUUQT=ffffffff09293c2a45525d5f4f58455e445a4a4221e5;Version=1;Max-Age=3600;path=/;secure;httponly
+cookie: _rauv_=97BB099A7EC243D8118108735BCB75E6.web09-ny_; Version=1; Domain=recreation.gov; Max-Age=630720000; Expires=Sun, 15-Apr-2035 02:54:41 GMT; Path="/; HttpOnly;"; Secure
+cookie: JSESSIONID=97BB099A7EC243D8118108735BCB75E6.web09-ny; Path=/; Secure; HttpOnly
+Extracting form's data...
+postParams: AemailGroup_1733152645=txchen%40gmail.com&ApasswrdGroup_704558654=testpwd2015&signinFromPurchaseFlow=1&sbmtCtrl=combinedFlowSignInKit
+
++++++++++ Login ++++++++++++++++++++++++++++
+Sending 'POST' request to URL : https://www.recreation.gov/memberSignInSignUp.do
+Post parameters : AemailGroup_1733152645=txchen%40gmail.com&ApasswrdGroup_704558654=testpwd2015&signinFromPurchaseFlow=1&sbmtCtrl=combinedFlowSignInKit
+Response Code : 200
+===cookies===
+cookie: NSC_QSPE-VXQSFD-IUUQT=ffffffff09293c2b45525d5f4f58455e445a4a4221e5;Version=1;Max-Age=3600;path=/;secure;httponly
+cookie: _rauv_=97BB099A7EC243D8118108735BCB75E6.web09-ny_; Version=1; Domain=recreation.gov; Max-Age=630720000; Expires=Sun, 15-Apr-2035 02:54:42 GMT; Path="/; HttpOnly;"; Secure
+cookie: _rauv_=97BB099A7EC243D8118108735BCB75E6.web09-ny_; Version=1; Domain=recreation.gov; Max-Age=630720000; Expires=Sun, 15-Apr-2035 02:54:42 GMT; Path="/; HttpOnly;"; Secure
+====== Login ======
+
+Account Overview
+Keep track of your reservations and account information.
+
+Profile Overview
+Name:..
+Email Address:..
+Phone:..
+Is this information correct? Update Profile
+
+
+loginOK = true
+
